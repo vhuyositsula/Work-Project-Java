@@ -1,0 +1,82 @@
+<header>
+    <nav class="navbar navbar-expand-sm border-bottom mb-2" >
+    <div class="container">
+        <a class="navbar-brand" routerLink="/product-list" ><img src="assets/img/logo2.png"></a>
+       
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link"routerLink="/product-list">Continue Shopping</a>
+                </li>
+              </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <a md-button (click)="logout()">Logout</a>
+            </form>
+        </div>
+    </div>
+</nav> 
+</header>
+<div class="container">
+
+<div *ngIf="cartItemUpdated" class="alert alert-success">
+    Cart Item Updated Successfully!
+</div>
+<div *ngIf="notEnoughStock" class="alert alert-warning">
+    Oops, some of the products don't have enough stock. Please update product quantity.
+</div>
+<div *ngIf="emptyCart" class="alert alert-warning">
+    Oops, your cart is empty. 
+</div>    
+ 
+<ngb-accordion #acc="ngbAccordion" [closeOthers]="true" activeIds="static-1">
+    <ngb-panel id="static-1" title="Item Details">
+        <ng-template ngbPanelContent>
+            <div id="collapseExample" [ngbCollapse]="false">
+            <div class="container-fluid" >
+                <h3 style="color:chocolate"><span style="margin-left: 5%;margin-right: 22%;color: greenyellow"></span>
+                <button class="btn btn-outline-success float-right" routerLink='/checkout'>CheckOut</button>
+                </h3>
+                <p class="float-right">
+                <strong>Total value is: {{shoppingCart.grandTotal | currency: 'ZAR':'symbol-narrow':'.2'}}</strong>
+                </p>
+                <table  class="table table-bordered row-border hover" style="width:100%">
+                <thead class="text-center ">
+                <tr>
+                    <th>Image</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Remove</th>
+                    <th>Add Quantity</th>
+                    <th>Total For Item</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cartItem of cartItemList" class="text-center">
+                    <td><a md-button (click)="onSelect(cartItem.product)"><img class="img-responsive" src="{{serverPath}}/image/product/{{cartItem.product.id}}.png" style="width:70px;" /></a></td>
+                    <td>{{cartItem.product.productName | uppercase}}</td>
+                    <td>{{cartItem.product.price | currency: 'ZAR':'symbol-narrow':'.2'}}</td>
+                    <td>
+                        <a class="pointer" (click)="onRemoveCartItem(cartItem)">delete</a>
+                    </td>
+                    <td>
+                        <div class="col-xs-2">
+                            <input hidden="hidden" name="id" [(ngModel)]="cartItem.id" />
+                               <input id="cartItem.id" name="qty"  class="form-control cartItemQty" [(ngModel)]="cartItem.qty" (ngModelChange)="cartItem.toUpdate=true" />
+                            <a md-button *ngIf="cartItem.toUpdate" class="pointer mat-warn" (click)="onUpdateCartItem(cartItem)">Update</a>
+                         </div>
+                    </td>
+                    <td>{{cartItem.product.price * cartItem.qty | currency: 'ZAR':'symbol-narrow':'.2'}}</td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </ng-template>
+    </ngb-panel>
+
+    <ngb-panel id="static-2">
+        <ng-template ngbPanelContent>
+            
+        </ng-template>
+      </ngb-panel>
+    

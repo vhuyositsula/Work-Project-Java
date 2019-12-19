@@ -1,0 +1,57 @@
+<mat-toolbar class="mat-accent">
+        <h3 [style.color]="'white'">ADMIN PORTAL</h3>
+        <span class="example-spacer"></span>
+        <span [hidden]="!loggedIn"><a mat-button [style.color]="'white'" routerLink='/productList'>View Product List</a></span>
+        <span [hidden]="!loggedIn"><a mat-button [style.color]="'white'" routerLink="/addNewProduct">Add a Product</a></span>
+        <span [hidden]="!loggedIn"><a mat-button [style.color]="'white'" (click)="logout()">Logout</a></span>
+</mat-toolbar>
+
+
+
+<div class="container">	
+	<div style="margin-top: 20px;">
+		<a routerLink="/productList"><i class="fa fa-long-arrow-left"></i> Go Back</a>
+		<span> / </span>
+		<a (click)="onSelect(product)" style="cursor: pointer">Edit</a>
+	</div>
+	<mat-grid-list cols="9" rowHeight="100px">
+		<mat-grid-tile [colspan]="3" [rowspan]="5">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<img [src]="'http://127.0.0.1:8080/image/product/'+product.id+'.png'" class="responsive-img" />
+				</div>
+			</div>
+		</mat-grid-tile>
+		<mat-grid-tile [colspan]="6">
+			<h3>{{product.productName}}</h3>
+        </mat-grid-tile>
+        <hr/>
+		<mat-grid-tile [colspan]="3" [rowspan]="3">
+                <mat-list>
+                        
+                    <mat-list-item>
+                        <p><strong>Category: </strong>{{product.category}}</p>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                        <p><strong>Price: </strong>{{product.price}}</p>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                        <p><strong>Number in Stock: </strong>{{product.inStockNumber}}</p>
+                    </mat-list-item>
+                </mat-list>
+		</mat-grid-tile>
+		
+		<mat-grid-tile [colspan]="6">
+			<p><strong>Description: </strong>{{product.description}}</p>
+		</mat-grid-tile>
+	</mat-grid-list>
+
+
+	<footer  class="page-footer font-small blue-grey lighten-5">
+			<div class="footer-copyright text-center text-black-50 py-3">© 2019 Copyright:
+				<a class="dark-grey-text" > AdminPortal</a>
+			</div>
+	</footer>	
+</div>

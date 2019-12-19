@@ -1,0 +1,33 @@
+<header>
+        <nav class="navbar navbar-expand-sm border-bottom mb-2" >
+          <a class="navbar-brand" [routerLink]='["/home"]' ><img src="assets/img/logo2.png " ></a>
+      
+        </nav>
+ </header>
+ 
+ <div class="wrapper" >
+     <div class="loginHeader">
+         Enjoy your Online Shopping
+     </div>
+     <div class="login-page">
+      <div class="form">
+        <div *ngIf="loginError" style="color:red;">
+          Incorrect username or password.
+        </div>
+        <form class="login-form form " (ngSubmit)="onLogin()">
+          
+          <input type="text" class="form-control" placeholder="Enter your username" id="username" name="username" [(ngModel)]="credential.username" required="required" autofocus="autofocus">
+          <!--<p style="color:#828282;">Enter your username</p> -->
+
+          <input type="password" class="form-control" placeholder="Enter your password" id="password" name="password" [(ngModel)]="credential.password" required="required" >
+         <!--< <p style="color:#828282;">Enter your password</p>-->
+
+          <button md-raised-button type="submit" class="mat-primary">login</button>
+          <p class="message">Not registered? <a [routerLink]='["/registration"]'>Create an account</a></p>
+          <p class="message">Forget password? <a [routerLink]='["/forgetpwd"]'>Click to recovery</a></p>
+        </form>
+      </div>
+    </div>
+ </div>
+ 
+     

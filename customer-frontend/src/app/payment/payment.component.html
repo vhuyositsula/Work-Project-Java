@@ -1,0 +1,207 @@
+<header>
+        <nav class="navbar navbar-expand-sm border-bottom mb-2" >
+        <div class="container">
+            <a class="navbar-brand" routerLink="/product-list" ><img src="assets/img/logo2.png"></a>
+           
+            <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item m-auto">
+                        <a class="nav-link" routerLink="/product-list">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" md-button routerLink="/cart">Shopping Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" md-button routerLink="/myProfile">My Profile</a>
+                    </li>
+                  </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <a md-button (click)="logout()">Logout</a>
+                </form>
+            </div>
+        </div>
+    </nav>
+  
+    </header>
+    
+<div class="container">
+        <p style="text-align:center"><a routerLink="/myProfile">Edit Profile</a></p>
+        <hr>
+        <h1>Edit Credit Card Details</h1>
+          <hr>
+          <div class="row">
+               
+          <form (ngSubmit)="onNewPayment()" method="post">
+                <div class="bg-info" *ngIf="updateUserPaymentInfo">User info updated.</div>
+                <input hidden="hidden" name="id" [(ngModel)]="userPayment.id" />
+                <div class="form-group">
+                    <h4>Home Address Details</h4>
+                </div>
+                <!-- Billing Address -->
+                <div class="form-group">
+                    <label for="billingName">* Home Address</label>
+                    <input type="text" class="form-control" id="billingAddress" placeholder="Address" name="userBillingAddress" required="required" [(ngModel)]="userBilling.userBillingAddress" />
+                </div>
+                <div class="form-group">
+                    <label for="billingAddress">* Street Address</label>
+                    <input type="text" class="form-control" id="billAddress" placeholder="Street Address " name="userBillingStreet" required="required" [(ngModel)]="userBilling.userBillingStreet" />
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="billingCity">* City/Surb</label>
+                            <input type="text" class="form-control" id="userBillingCity" placeholder="Your City" name="userBillingCity" required="required" [(ngModel)]="userBilling.userBillingCity" />
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="billingProvince">* Province</label>
+                            <select id="billingProvince" class="form-control" name="userBillingprovince" [(ngModel)]="userBilling.userBillingProvince" required="required">
+                                <option value="" disabled>-- Province --</option>
+                                <option *ngFor="let province of provinceList">{{province}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="billingPostalCode">* Postal Code</label>
+                            <input type="text" class="form-control" id="userBillingPostalCode" placeholder="Postal Code" name="userBillingPostalCode" required="required" [(ngModel)]="userBilling.userBillingPostalCode" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Payment -->
+                <hr>
+                <div class="form-group">
+                    <h4>Credit Card Information</h4>
+                </div>
+                 <!-- left column -->
+                 <div class="col-md-3">
+                        <div class="text-center">
+                         <!--  <h1>hello</h1> -->
+                        </div>
+                      </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <img src="assets/img/creditcard.png" class="img-responsive" />
+                        <br>
+                        <div class="form-group">
+                            <label for="cardType">* Give a name for your card:</label>
+                            <input type="text" class="form-control" id="cardName" placeholder="Card Name" name="cardName" required="required" [(ngModel)]="userPayment.cardName" />
+                        </div>
+                        <div class="form-group">
+                            <label for="cardType">* Select Card Type</label>
+                            <select id="cardType" class="form-control" name="cardType" [(ngModel)]="userPayment.type" required="required">
+                                <option value="" disabled>-- Card Type --</option>
+                                <option value="cheque">Cheque</option>
+                                <option value="credit">Credit</option>
+                                <option value="debt">Debt</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardHolder">* Card Holder</label>
+                            <input type="text" class="form-control" id="cardholder" placeholder="Card Holder Name" name="cardHolderName" required="required" [(ngModel)]="userPayment.holderName" />
+                        </div>
+                        <div class="form-group">
+                            <label for="cardNumber">* Card Number</label>
+                            <div class="input-group">
+                                <input required="required" id="cardNumber" type="tel" class="form-control" name="cardNumber" placeholder="Valid Card Number" [(ngModel)]="userPayment.cardNumber" />
+                                <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-7">
+                        <div class="form-group">
+                            <label>* Expiration Date</label>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <select class="form-control" name="expiryMonth" required="required" [(ngModel)]="userPayment.expiryMonth">
+                                        <option value="" disabled="disabled">
+                                            -- Month --
+                                        </option>
+                                        <option value="1">Jan (01)</option>
+                                        <option value="2">Feb (02)</option>
+                                        <option value="3">Mar (03)</option>
+                                        <option value="4">Apr (04)</option>
+                                        <option value="5">May (05)</option>
+                                        <option value="6">Jun (06)</option>
+                                        <option value="7">July (07)</option>
+                                        <option value="8">Aug (08)</option>
+                                        <option value="9">Sep (09)</option>
+                                        <option value="10">Oct (10)</option>
+                                        <option value="11">Nov (11)</option>
+                                        <option value="12">Dec (12)</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <select class="form-control" name="expiryYear" required="required" [(ngModel)]="userPayment.expiryYear">
+                                        <option value="" disabled="disabled">
+                                            -- Year --
+                                        </option>
+                                        <option value="19">2019</option>
+                                        <option value="20">2020</option>
+                                        <option value="21">2021</option>
+                                        <option value="22">2022</option>
+                                        <option value="23">2023</option>
+                                        <option value="24">2024</option>
+                                        <option value="25">2025</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-5 pull-right">
+                        <div class="form-group">
+                            <label for="cardCVC">CV Code</label>
+                            <input id="cardCVC" type="tel" class="form-control" name="cardCVC" placeholder="CVC" [(ngModel)]="userPayment.cvc" />
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <hr>
+                <div class="form-group">
+                    <h4>Delivery Address </h4>
+                </div>
+                <div class="bg-info" *ngIf="updateUserDeliveryInfo">User info updated.</div>
+                <input hidden="hidden" name="id" [(ngModel)]="userDelivery.id" />
+                <div class="form-group">
+                    <label for="deliveryname">* Delivery Address</label>
+                    <input type="text" class="form-control" id="deliveryName" placeholder="Delivery Address" name="userDeliveryName" required="required" [(ngModel)]="userDelivery.userDeliveryAddress" />
+                </div>
+                <div class="form-group">
+                    <label for="deliveryAddress">* Street Address</label>
+                    <input type="text" class="form-control" id="deliveryAddress" placeholder="Street Address " name="userDeliveryStreet" required="required" [(ngModel)]="userDelivery.userDeliveryStreet" />
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="deliveryCity">* City/Surb</label>
+                            <input type="text" class="form-control" id="deliveryCity" placeholder="Your Delivery City" name="userDeliveryCity" required="required" [(ngModel)]="userDelivery.userDeliveryCity" />
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="deliveryProvince">* Province</label>
+                            <select id="deliveryProvince" class="form-control" name="userDeliveryProvince" [(ngModel)]="userDelivery.userDeliveryProvince" required="required">
+                                <option value="" disabled>-- Province --</option>
+                                <option *ngFor="let province of provinceList">{{province}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="deliveryPostalCode">* PostalCode</label>
+                            <input type="text" class="form-control" id="userDeliveryPostalCode" placeholder="Postal Code " name="userDeliveryPostalCode" required="required" [(ngModel)]="userDelivery.userDeliveryPostalCode" />
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <button md-raised-button type="submit" class="mat-primary">
+                    Save All
+                </button>
+            </form>
+</div>

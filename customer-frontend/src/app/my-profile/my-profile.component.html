@@ -1,0 +1,129 @@
+<header>
+    <nav class="navbar navbar-expand-sm border-bottom mb-2" >
+    <div class="container">
+        <a class="navbar-brand" routerLink="/product-list" ><img src="assets/img/logo2.png"></a>
+       
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link" routerLink="/product-list">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" md-button routerLink="/cart">Shopping Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" md-button routerLink="/myProfile">My Profile</a>
+                </li>
+              </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <a md-button (click)="logout()">Logout</a>
+            </form>
+        </div>
+    </div>
+</nav>
+ <!--   <nav class="navbar navbar-expand-sm border-bottom mb-2" >
+      <a class="navbar-brand" routerLink="/product-list" ><img src="assets/img/logo2.png"></a>
+
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+        <ul class="nav navbar-nav navbar-right">
+            <li *ngIf="loggedIn">
+                <a md-button routerLink="/shoppingCart">SHOPPING CART</a>
+            </li>
+            <li *ngIf="loggedIn">
+                <a md-button routerLink="/myProfile">MY PROFILE</a>
+            </li>
+            <li *ngIf="loggedIn">
+                <a md-button (click)="logout()">LOGOUT</a>
+            </li>
+        </ul>
+      </div>
+    </nav>-->
+</header>
+
+<div class="container">
+        <p style="text-align:center"><a routerLink="/addPayment">Edit Credit Card Details</a></p>
+        <hr>
+        <h1>Edit Profile</h1>
+          <hr>
+          <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+              
+          </div>
+        <div class="row">
+          <!-- edit form column -->
+          <div class="col-md-9 personal-info">
+            <div class="alert alert-danger" *ngIf="incorrectPassword">
+                <strong>Incorrect Password!</strong> Please enter the correct password for the current user.
+            </div>
+            <div class="alert alert-success" *ngIf="updateSuccess">
+                <strong>Update Success!</strong>
+            </div>
+            <h3>Personal info</h3>
+            
+            <form class="form-horizontal" role="form" (ngSubmit)="onUpdateUserInfo()">
+                    <input type="hidden" name="id" [(ngModel)]="user.id" />
+                    <div class="bg-info" *ngIf="updateUserInfo">User info updated.</div>
+                <div class="form-group">
+                <label for="firstName" class="col-lg-3 control-label">First name:</label>
+                <div class="col-lg-8">
+                        <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="user.firstName" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="lastName" class="col-lg-3 control-label">Last name:</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="user.lastName" />
+                </div>
+              </div>
+              <div class="form-group">
+                    <label class="col-md-3 control-label">
+                        Username*:
+                    </label>&nbsp;<span *ngIf="usernameExists" style="color:red">Username already exists. Choose a different one.</span>
+                    <div class="col-md-8">
+                        <input required="required" type="text" class="form-control" id="username" name="username" [(ngModel)]="user.username" />
+                    </div>
+                  </div>
+              <div class="form-group">
+                <label for="email" class="col-lg-3 control-label">
+                    Email Address *:
+                </label>&nbsp;<span *ngIf="emailExists" style="color:red">Email already exists. Choose a different one.</span>
+                <div class="col-lg-8">
+                        <input required="required" type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" />
+                </div>
+              </div>
+              <div class="form-group">
+                    <label  for="currentPassword" class="col-md-3 control-label">
+                        Current Password:
+                    </label>
+                    <div class="col-md-8">
+                            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="currentPassword" />	
+                    </div>
+                  </div>
+              <div class="form-group">
+                <label for="txtNewPassword" class="col-md-3 control-label">
+                    New Password:
+                </label>&nbsp;<span id="checkPasswordMatch" style="color:red;"></span>
+                <div class="col-md-8">
+                        <input type="password" class="form-control" id="txtNewPassword" name="txtNewPassword" [(ngModel)]="newPassword" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="txtConfirmPassword" class="col-md-3 control-label">
+                    Confirm New password:
+                </label>
+                <div class="col-md-8">
+                    <input type="password" class="form-control" id="txtConfirmPassword" name="txtNewPassword"  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-3 control-label"></label>
+                <div class="col-md-8">
+                  <input type="submit" class="btn btn-primary" id="udpateuserInfoButton" value="Save Changes">
+                  <span></span>
+                  <input type="reset" class="btn btn-default" value="Cancel">
+                </div>
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+    <hr>

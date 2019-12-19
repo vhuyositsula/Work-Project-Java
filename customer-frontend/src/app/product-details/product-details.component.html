@@ -1,0 +1,108 @@
+<header>
+    <nav class="navbar navbar-expand-sm border-bottom mb-2" >
+    <div class="container">
+        <a class="navbar-brand" routerLink="/product-list" ><img src="assets/img/logo2.png"></a>
+       
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link" routerLink="/product-list">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" md-button routerLink="/cart">Shopping Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" md-button routerLink="/myProfile">My Profile</a>
+                </li>
+              </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <a md-button (click)="logout()">Logout</a>
+            </form>
+        </div>
+    </div>
+</nav>
+ <!--   <nav class="navbar navbar-expand-sm border-bottom mb-2" >
+      <a class="navbar-brand" routerLink="/product-list" ><img src="assets/img/logo2.png"></a>
+
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+        <ul class="nav navbar-nav navbar-right">
+            <li *ngIf="loggedIn">
+                <a md-button routerLink="/shoppingCart">SHOPPING CART</a>
+            </li>
+            <li *ngIf="loggedIn">
+                <a md-button routerLink="/myProfile">MY PROFILE</a>
+            </li>
+            <li *ngIf="loggedIn">
+                <a md-button (click)="logout()">LOGOUT</a>
+            </li>
+        </ul>
+      </div>
+    </nav>-->
+</header>
+
+<div class="container">
+        <h3><span *ngIf="addProductSuccess" style="color:forestgreen"><i class="fa fa-check" style="color:forestgreen"></i>Added to cart.</span></h3>
+        <h3><span *ngIf="notEnoughStock" style="color:red">Oops, only <span>{{product.inStockNumber}}</span> In Stock.</span> </h3>
+    <div class="card">
+            <div class="row">
+              <aside class="col-sm-5 border-right">
+                <article class="gallery-wrap">
+                  <div class="img-big-wrap">
+                    <div> <a href="#"><img class="img-responsive" src="{{serverPath}}/image/product/{{product.id}}.png" style="height: 550px; width:460px"  /></a></div>
+                  </div> <!-- slider-product.// -->
+                 
+                </article> <!-- gallery-wrap .end// -->
+              </aside>
+              <aside class="col-sm-7">
+                <article class="card-body p-5">
+                  <h3 class="title mb-3" style="color:  #991F41" >{{product.productName | uppercase}}</h3>
+        
+                  <p class="price-detail-wrap">
+                    <span class="price h3 " style="color: #575757">
+                      <span class="currency"></span><span class="num">{{product.price | currency: 'ZAR':'symbol-narrow':'.2'}}</span>
+                    </span>
+        
+                  </p> <!-- price-detail-wrap .// -->
+        
+                  <dl class="item-property">
+                    <dt class="text-uppercase " style="color: #575757" ><u>Description</u></dt>
+                    <dd>
+                      <p>
+                        {{product.description}}
+                      </p>
+                    </dd>
+                  </dl>
+                  <hr>
+        
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <dl class="param param-feature">
+                        <dt class="text-uppercase text-danger"><u>Save</u></dt>
+                        <dd  class=" text-danger">{{product.price*35/100 | currency: 'ZAR':'symbol-narrow':'.2'}}</dd>
+                      </dl>  <!-- item-property-hor .// -->
+                    </div>
+                    <div class="col-sm-4">
+                      <dl class="param param-feature">
+                        <dt class="text-uppercase " style="color: #575757"><u>Quantity</u></dt>
+                        <dd>
+                        <select [(ngModel)]="qty" class="browser-default" style=" display:inline;">
+                          <option *ngFor="let x of numberList" [ngValue]="x">{{x}}</option>
+                        </select>
+                        </dd>
+                      </dl>  <!-- item-property-hor .// -->
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="col-xs-6" style="text-align: center;">
+                        <h4 *ngIf="product.inStockNumber>10" style="color:green;">In Stock</h4>
+                        <h4 *ngIf="product.inStockNumber<10 && product.inStockNumber>0" style="color:green;">Only <span>{{product.inStockNumber}}</span> In Stock</h4>
+                        <h4 *ngIf="product.inStockNumber==0" style="color:darkred;">Unavailable</h4>
+                    </div>
+                  <hr>
+                  
+                  <button class="btn btn-lg btn-outline-primary text-uppercase ml-2"  (click)="onAddToCart()"> <i class="fas fa-shopping-cart"></i> Add To Cart </button>
+                </article> <!-- card-body.// -->
+              </aside> <!-- col.// -->
+            </div> <!-- row.// -->
+          </div> <!-- card.// -->
+        </div>

@@ -1,0 +1,50 @@
+<mat-toolbar class="mat-accent">
+	<h3 [style.color]="'white'">ADMIN PORTAL</h3>
+	<span class="example-spacer"></span>
+	<span [hidden]="!loggedIn"><a mat-button [style.color]="'white'" routerLink="/addNewProduct">Add a Product</a></span>
+	<span [hidden]="!loggedIn"><a mat-button [style.color]="'white'" (click)="logout()">Logout</a></span>
+</mat-toolbar>
+
+
+
+<div class="container">
+	<div class="table-responsive" style="margin-top: 30px;">
+		<table id="productListTable" class="table bordered highlight">
+			<thead>
+				<tr>
+					<th>
+						<input type="checkbox" (change)="updateSelected($event.target.checked)" />
+					</th>
+					<th>Product Name</th>
+					<th>Category</th>
+					<th>Price</th>
+					<th>Active?</th>
+					<th>Operation</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor = "let product of productList">
+					<td>
+						<input hidden="hidden" name="id" />
+						<input type="checkbox" [checked]="allChecked" (change)="updateRemoveProductList($event.target.checked, product)" />
+					</td>
+					<td><a (click)="onSelect(product)" style="cursor:pointer">{{product.productName}}</a></td>
+					<td>{{product.category}}</td>
+					<td>{{product.price}}</td>
+					<td>{{product.active}}</td>
+					<td>
+						<input hidden="hidden" name="id" />
+						<button mat-button (click)="openDialog(product)" value="delete"><span class="fa fa-times"></span> delete</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<button mat-raised-button class="mat-warn" id="deleteSelected" (click)="removeSelectedProducts()">Delete Selected</button>
+</div>
+
+<footer  class="page-footer font-small blue-grey lighten-5">
+		<div class="footer-copyright text-center text-black-50 py-3">© 2019 Copyright:
+			<a class="dark-grey-text" > AdminPortal</a>
+		</div>
+</footer>

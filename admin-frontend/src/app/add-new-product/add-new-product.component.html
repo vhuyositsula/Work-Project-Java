@@ -1,0 +1,65 @@
+<mat-toolbar class="mat-accent">
+    <h3 [style.color]="'white'">ADMIN PORTAL</h3>
+    <span class="example-spacer"></span>
+    <span [hidden]="!loggedIn"><a mat-button [style.color]="'white'" routerLink='/productList'>View Product List</a></span>
+    <span [hidden]="!loggedIn"><a mat-button [style.color]="'white'" (click)="logout()">Logout</a></span>
+</mat-toolbar>
+
+<div class="container">
+        <h3><span *ngIf="addProductSuccess" style="color:forestgreen"><i class="fa fa-check" style="color:forestgreen"></i>Product added successfully!</span></h3>
+        
+            <h3 style="margin-top: 30px;">New Product Information <span style="font-size:small">* is a required field</span></h3>
+    
+            <form (ngSubmit)="onSubmit()">
+               
+                        <mat-form-field>
+                            <input matInput id="productName" type="text" required [(ngModel)]="newProduct.productName" name="productName" placeholder="Product Name">
+                        </mat-form-field>
+                  
+                
+    
+               
+                        <mat-select placeholder="Category" id="category" name="category" [(ngModel)]="newProduct.category">
+                            <mat-option value="Food">Food</mat-option>
+                            <mat-option value="Drink">Drink</mat-option>
+                        </mat-select>
+                   
+
+                
+                        <mat-form-field>
+                            <input matInput id="price" type="number" [(ngModel)]="newProduct.price" name="price" step="0.01" placeholder="Price">
+                        </mat-form-field>
+                   
+                        <mat-form-field>
+                            <input matInput id="inStockNumber" type="number" [(ngModel)]="newProduct.inStockNumber" name="inStockNumber" step="0.01" placeholder="Numbers In Stock">
+                        </mat-form-field>
+                    
+                    
+                        &nbsp;
+                        <mat-slide-toggle [color]="color" [checked]="checked" [disabled]="disabled" [(ngModel)]="newProduct.active" name="active">Active</mat-slide-toggle>
+                   
+    
+                <mat-form-field>
+                    <textarea matInput id="description" [(ngModel)]="newProduct.description" name="description" placeholder="Description" required></textarea>
+                </mat-form-field>
+                Image &nbsp;
+                <input id="title" type="file" id="productImage" name="productImage" (change)="uploadImageService.fileChangeEvent($event)">
+                <br><br>
+
+                
+                                <button class="mat-primary" mat-raised-button type="submit">Add Product</button>
+                        
+                            <a class="mat-warn" mat-raised-button routerLink="/">Cancel</a>
+                        
+
+            </form>
+
+            <footer  class="page-footer font-small blue-grey lighten-5">
+                    <div class="footer-copyright text-center text-black-50 py-3">© 2019 Copyright:
+                        <a class="dark-grey-text" > AdminPortal</a>
+                    </div>
+            </footer>
+     
+</div>
+
+ 
